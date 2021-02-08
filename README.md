@@ -28,7 +28,7 @@ CSS
 
 - The user will have the option to refer to the study guide during the game
 
--When the cards are cards are matched, the user will have the option of moving onto the next round
+ - When the cards are cards are matched, the user will have the option of moving onto the next round
 
 - The user will have to match an expanded deck of cards containing more subjects and their accomplishments
 

@@ -1,0 +1,15 @@
+body {
+    background-color:#A5F2F3;
+}
+
+img {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* object-fit: contain; */
+    align-items: center;
+    align-content: space-between;
+    max-width: 100%;
+}
