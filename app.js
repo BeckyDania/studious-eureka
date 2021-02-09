@@ -104,6 +104,7 @@ completeSpread.sort(() => 0.5 - Math.random())
 let firstCardPicked = ''
 let secondCardPicked = ''
 let numOfCardsPicked = 0
+let previousTarget = null
 
 
 
@@ -152,13 +153,13 @@ board.addEventListener('click', event => {
     console.log(firstCardPicked)
     console.log(secondCardPicked)
 
-    if(clicked.nodeName === 'SECTION'){
+    if(clicked.nodeName === 'SECTION' || clicked === previousTarget){
         return
     } if(numOfCardsPicked < 2){
-        numOfCardsPicked+=1
+        numOfCardsPicked++
         console.log(numOfCardsPicked)
-
-    } if(numOfCardsPicked === 1){
+    } 
+    if(numOfCardsPicked === 1){
         firstCardPicked = clicked.dataset.set
         //console.log(firstCardPicked)
         clicked.classList.add('selected')
@@ -170,8 +171,13 @@ board.addEventListener('click', event => {
      if (firstCardPicked !== '' && secondCardPicked !== '') {
        if(firstCardPicked === secondCardPicked){
            checkForMatch()
+           resetRound()
+        } else {
+            resetRound()
         }
        }
+     previousTarget = clicked
+     console.log(previousTarget)
    })
 
 }
@@ -180,9 +186,22 @@ const checkForMatch = () => {
      let selected = document.querySelectorAll('.selected')
     selected.forEach((cardElement) => {
         cardElement.classList.add('matched')
+        //This will eventually create the bio card and removed from the gameboard
     }) 
 }
 
+const resetRound = () => {
+    firstCardPicked = ''
+    secondCardPicked = ''
+    numOfCardsPicked = 0
+    previousTarget = null
+
+    let selected = document.querySelectorAll('.selected')
+    selected.forEach(cardElement => {
+        cardElement.classList.remove('selected')
+    })
+
+}
 
 /* const flipcard = () => {
     let cardId = this.getAttribute("data-id")
@@ -196,5 +215,6 @@ const checkForMatch = () => {
 createSpread()
 selections()
 checkForMatch()
+resetRound()
 // flipcard()
  
