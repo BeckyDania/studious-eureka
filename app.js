@@ -8,7 +8,7 @@ const katherineJohnson = "wmxnSTEMimages/katehrine_johnson.png"
 const maeJemison = "wmxnSTEMimages/maeJemison.png"
 const maryGoldRoss = "wmxnSTEMimages/mary_gold_ross.png"
 const maryamMirzakhani = "wmxnSTEMimages/maryam.png"
-const valerieThomas = "wmxnSTEMimages/maryam.png"
+const valerieThomas = "wmxnSTEMimages/valerie_thomas.png"
 
 const chShWuBio = "Chien-Shiung Wu was a Chinese-American experimental physicist who made significant contributions in the field of nuclear physics. Wu worked on the Manhattan Project, where she helped develop the process for separating uranium into uranium-235 and uranium-238 isotopes by gaseous diffusion."
 
@@ -101,76 +101,88 @@ console.table(completeSpread)
 completeSpread.sort(() => 0.5 - Math.random())
 //console.table(cards)
 
-let cardsFlipped = []
-let cardsFlippedId = []
+let firstCardPicked = ''
+let secondCardPicked = ''
+let numOfCardsPicked = 0
+
+
 
 //This works - prints image, full bio and name
 //console.table(cards[0])
 
-//Create divs for each card layout
+const game = document.getElementById("gameboard")
+const board = document.createElement('section')
+board.className = 'board'
+board.className = "row-fluid d-flex justify-content-between align-items-center align-content-between flex-wrap"
+game.appendChild(board)
 
-//back of card spread
-/* const createDivs = () => {
-    for(i=0; i < cards.length; i++){
-        //let div = ("div")
-        let div1 = document.createElement("div")
-        div1.setAttribute("data-id", i)
-        div1.setAttribute("id", "cards")
-        document.getElementById("gameboard").appendChild(div1)
-    }
-} */
+/* cards.forEach((card) => {
+
+    const cardElement = document.createElement("div")
+    cardElement.classList.add('card')
+    cardElement.setAttribute('data-set', card.name)
+    cardElement.style.background = `url(${card.image})`
+    cardElement.className = "img-fluid img-thumbnail col-3"
+    //card.style.backgroundImage = cards[i].image
+    board.appendChild(cardElement)
+}) */
 
 const createSpread = () => {
-    for(i=0; i < completeSpread.length; i++){
+
+for(let i=0; i < completeSpread.length; i++){
+        
+    let cardElement = document.createElement("img")
+    cardElement.src = completeSpread[i].image
     
-    /* for(i=0; i < cards.length; i++){
-        //let div = ("div")
-        let div1 = document.createElement("div")
-        div1.setAttribute("data-id", i)
-        div1.setAttribute("id", "cards") */
-        
-        let cardElement = document.createElement("img")
-        cardElement.src= completeSpread[i].image
-        //"wmxnSTEMimages/WomenInStem.jpg"
-        cardElement.className = "img-fluid img-thumbnail col-3"
-        //classList - you can add or remove without affecting others; className - wipes out all when empty.  classList for toggle and replace methods
-       cardElement.classList.add('card')
-
+    cardElement.className = "img-fluid img-thumbnail col-3"
     
-        
-      /*  document.getElementById("#gameboard").appendChild(cardElement) */
+    cardElement.classList.add('card')
+    // have to add id to make sure that selected works
 
-        //for(i = 0; i < div[data-id]; i++){
+    cardElement.setAttribute('data-set', completeSpread[i].name)
 
-        
-        //document.getElementById(div1).appendChild(cardElement)
-        // document.querySelectorAll('div[data-id]').appendChild('img')
-      //  cardElement.addEventListener("click", flipcard)
-     document.getElementById("gameboard").appendChild(cardElement)
-       //console.table(`img[data-id = "${i}"]`)
+    //document.getElementById("gameboard").appendChild(cardElement)
+    board.appendChild(cardElement)
+ 
    }
+} 
+const selections = () => {
+board.addEventListener('click', event => {
+    const clicked = event.target
+    console.log(firstCardPicked)
+    console.log(secondCardPicked)
+
+    if(clicked.nodeName === 'SECTION'){
+        return
+    } if(numOfCardsPicked < 2){
+        numOfCardsPicked+=1
+        console.log(numOfCardsPicked)
+
+    } if(numOfCardsPicked === 1){
+        firstCardPicked = clicked.dataset.set
+        //console.log(firstCardPicked)
+        clicked.classList.add('selected')
+    }else if(numOfCardsPicked === 2){
+             secondCardPicked = clicked.dataset.set
+             clicked.classList.add('selected')
+          //   console.log(secondCardPicked)
+     }
+     if (firstCardPicked !== '' && secondCardPicked !== '') {
+       if(firstCardPicked === secondCardPicked){
+           checkForMatch()
+        }
+       }
+   })
+
 }
 
-const selections = () =>{
-    document.getElementsByClassName('card').addEventlistener('click', (event) {
-
-        let clicked = event.target
-
-    if(clicked.nodeName === )
-    })
+const checkForMatch = () => {
+     let selected = document.querySelectorAll('.selected')
+    selected.forEach((cardElement) => {
+        cardElement.classList.add('matched')
+    }) 
 }
 
-//const completeSpread = cards.concat(cards)
-
-/* const checkForMatch = () => {
-    const wisImage = document.getElementsByTagName("img")
-    const firstPick = cardsToPlay[0]
-    const nextPick = cardsToPlay[1]
-
-    if(firstPick === nextPick){
-        wisImage[firstPick].setAttribute('src', "wxmnSTEMimages/Wome")
-    }
-} */
 
 /* const flipcard = () => {
     let cardId = this.getAttribute("data-id")
@@ -180,8 +192,9 @@ const selections = () =>{
     this.setAttribute("src", cards[cardId].image)
     checkForMatch()
 } */
-//createDivs()
-createSpread()
 
+createSpread()
+selections()
+checkForMatch()
 // flipcard()
  
