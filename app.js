@@ -133,19 +133,27 @@ game.appendChild(board)
 const createSpread = () => {
 
 for(let i=0; i < completeSpread.length; i++){
-        
+    
+    const front = document.createElement('img')
+    front.classList.add('front')
+    front.src = "wmxnSTEMimages/WomenInStem.jpg"
+    front.className = "img-fluid img-thumbnail col-3"
+    
+    //cardElement.classList.add('card')
+
     let cardElement = document.createElement("img")
     cardElement.src = completeSpread[i].image
-    
     cardElement.className = "img-fluid img-thumbnail col-3"
-    
+    cardElement.setAttribute('data-set', completeSpread[i].name)
     cardElement.classList.add('card')
+    
     // have to add id to make sure that selected works
 
-    cardElement.setAttribute('data-set', completeSpread[i].name)
+    
 
     //document.getElementById("gameboard").appendChild(cardElement)
-    board.appendChild(cardElement)
+    board.appendChild(front)
+    front.appendChild(cardElement)
  
    }
 } 
