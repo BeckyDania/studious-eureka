@@ -106,6 +106,8 @@ let secondCardPicked = ''
 let numOfCardsPicked = 0
 let previousTarget = null
 
+let delay = 1000
+
 
 
 //This works - prints image, full bio and name
@@ -170,10 +172,10 @@ board.addEventListener('click', event => {
      }
      if (firstCardPicked !== '' && secondCardPicked !== '') {
        if(firstCardPicked === secondCardPicked){
-           checkForMatch()
-           resetRound()
+           setTimeout(checkForMatch, delay)
+           setTimeout(resetRound, delay)
         } else {
-            resetRound()
+            setTimeout(resetRound, delay)
         }
        }
      previousTarget = clicked
