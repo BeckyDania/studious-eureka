@@ -139,13 +139,14 @@ const createSpread = () => {
         flipFront.appendChild(front)
         front.src = "wmxnSTEMimages/WomenInStem.jpg"
         front.className = "img-fluid img-thumbnail"
-      //  front.setAttribute('data-set', completeSpread[i].name)
+        flipFront.setAttribute('data-set', completeSpread[i].name)
         front.classList.add('front')
         
 
         //cardElement.classList.add('card')
         const flipBack = document.createElement('div')
         const cardElement = document.createElement("img")
+        flipFront.setAttribute('data-set', completeSpread[i].name)
         flipBack.appendChild(cardElement)
         cardElement.src = completeSpread[i].image
         cardElement.className = "img-fluid img-thumbnail inline"
@@ -192,6 +193,7 @@ const createSpread = () => {
                //clicked.replaceWith(image)
                 //image.classList.add('selected')
              // clicked.style.display = "none"
+             clicked.style.visibility = "hidden"
 
               //  clicked.zIndex = 0
                //document.getElementsByClassName('.selection').style.visibility = "visible"
@@ -199,6 +201,7 @@ const createSpread = () => {
             }else if(numOfCardsPicked === 2){
                      secondCardPicked = clicked.parentNode.dataset.set
                      clicked.parentNode.classList.add('selected')
+                     clicked.style.visibility = "hidden"
                 //     clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
                    //  clicked.parentNode.lastElementChild.classList.add('select')
                      //.style.zIndex = "2"
@@ -210,7 +213,7 @@ const createSpread = () => {
              if (firstCardPicked !== '' && secondCardPicked !== '') {
                if(firstCardPicked === secondCardPicked){
                    setTimeout(checkForMatch, delay)
-                   //getElementsByClassName('matched').remove()
+                   getElementsByClassName('matched').remove()
                    setTimeout(resetRound, delay)
                 } else {
                     setTimeout(resetRound, delay)
@@ -241,8 +244,9 @@ const createSpread = () => {
         
             let selected = document.querySelectorAll('.select')
             selected.forEach(cardElement => {
-              //console.log(selected.parentNode)
-              //.insertBefore(front, selected)
+                
+            // Make clicked item visible when no match
+
             // write new function to bring back back of card
            cardElement.classList.remove('select')
            
