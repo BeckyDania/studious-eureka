@@ -1,6 +1,36 @@
 body {
     background-color:#A5F2F3;
 }
+.board{
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.front, back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+
 
 /* img {
     display: flex;
@@ -23,17 +53,6 @@ body {
     border: 4px solid greenyellow;
 }
 
-.front{
-    position: absolute;
-    z-index: 1;
-}
-
- .back {
-   position: relative;
-   z-index: 0;
-   right: 1px
-
- } 
 
  .card,
  .back,

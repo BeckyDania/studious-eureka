@@ -117,7 +117,7 @@ const game = document.getElementById("gameboard")
 const board = document.createElement('section')
 board.className = 'board'
 //board.className = "row-fluid d-flex justify-content-between align-items-center align-content-between flex-wrap"
-board.className = "row-fluid d-flex flex-wrap position-relative"
+board.className = "row-fluid d-flex flex-wrap position-relative grid"
 
 game.appendChild(board)
 
@@ -134,7 +134,9 @@ const createSpread = () => {
 
 
 
+        const flipFront = document.createElement('div')
         const front = document.createElement('img')
+        flipFront.appendChild(front)
         front.src = "wmxnSTEMimages/WomenInStem.jpg"
         front.className = "img-fluid img-thumbnail"
       //  front.setAttribute('data-set', completeSpread[i].name)
@@ -142,8 +144,9 @@ const createSpread = () => {
         
 
         //cardElement.classList.add('card')
-    
-        let cardElement = document.createElement("img")
+        const flipBack = document.createElement('div')
+        const cardElement = document.createElement("img")
+        flipBack.appendChild(cardElement)
         cardElement.src = completeSpread[i].image
         cardElement.className = "img-fluid img-thumbnail inline"
         cardElement.setAttribute('data-set', completeSpread[i].name)
@@ -157,8 +160,8 @@ const createSpread = () => {
         front.appendChild(cardElement) */
 
         board.appendChild(card)
-        card.appendChild(front)
-        card.appendChild(cardElement)
+        card.appendChild(flipFront)
+        card.appendChild(flipBack)
      
        }
     } 
@@ -183,11 +186,12 @@ const createSpread = () => {
                 console.log(firstCardPicked)
                 clicked.parentNode.classList.add('selected')
                 //clicked.parentNode.lastElementChild.classList.add('selection')
-                clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
-                clicked.parentNode.lastElementChild.classList.add('selected')
+              //  clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
+               //clicked.parentNode.lastElementChild.classList.add('select')
+              // clicked.parentNode.lastElementChild.style.zIndex = "2"
                //clicked.replaceWith(image)
                 //image.classList.add('selected')
-               clicked.style.display = "none"
+             // clicked.style.display = "none"
 
               //  clicked.zIndex = 0
                //document.getElementsByClassName('.selection').style.visibility = "visible"
@@ -195,8 +199,9 @@ const createSpread = () => {
             }else if(numOfCardsPicked === 2){
                      secondCardPicked = clicked.parentNode.dataset.set
                      clicked.parentNode.classList.add('selected')
-                     clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
-                     clicked.parentNode.lastElementChild.classList.add('selected').style.zIndex = "2"
+                //     clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
+                   //  clicked.parentNode.lastElementChild.classList.add('select')
+                     //.style.zIndex = "2"
                      //clicked.style.display = "none"
                      //clicked.replaceWith(image)
                      //image.classList.add('selected')
@@ -234,12 +239,12 @@ const createSpread = () => {
             numOfCardsPicked = 0
             previousTarget = null
         
-            let selected = document.querySelectorAll('.selected')
+            let selected = document.querySelectorAll('.select')
             selected.forEach(cardElement => {
-                selected.parentNode.insertBefore(parentNode.lastElementChild, selected)
-                
+              //console.log(selected.parentNode)
+              //.insertBefore(front, selected)
             // write new function to bring back back of card
-            cardElement.classList.remove('selected')
+           cardElement.classList.remove('select')
            
            })
         
