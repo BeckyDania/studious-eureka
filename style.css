@@ -16,13 +16,34 @@ body {
 
 .selected{
     border: 4px solid rgb(211, 72, 95);
+    
 }
 
 .matched{
     border: 4px solid greenyellow;
-    background-image: none;
 }
 
-/* .card {
-    display: none;
-} */
+.front{
+    position: absolute;
+    z-index: 1;
+}
+
+ .back {
+   position: relative;
+   z-index: 0;
+   right: 1px
+
+ } 
+
+ .card,
+ .back,
+ .front {
+   height: 150px;
+   width: 150px;
+ }
+
+ .back, .card, .front{
+     height: 150px;
+     width: 150px;
+ }
+

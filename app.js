@@ -106,7 +106,7 @@ let secondCardPicked = ''
 let numOfCardsPicked = 0
 let previousTarget = null
 
-let delay = 1000
+let delay = 10
 
 
 
@@ -116,7 +116,9 @@ let delay = 1000
 const game = document.getElementById("gameboard")
 const board = document.createElement('section')
 board.className = 'board'
-board.className = "row-fluid d-flex justify-content-between align-items-center align-content-between flex-wrap"
+//board.className = "row-fluid d-flex justify-content-between align-items-center align-content-between flex-wrap"
+board.className = "row-fluid d-flex flex-wrap position-relative"
+
 game.appendChild(board)
 
 
@@ -124,35 +126,51 @@ const createSpread = () => {
 
     for(let i=0; i < completeSpread.length; i++){
         
+       const card = document.createElement('div')
+        card.classList.add('card')
+        card.className = "col-fluid-3"
+        card.setAttribute('data-set', completeSpread[i].name)
+ 
+
+
+
         const front = document.createElement('img')
-        front.classList.add('front')
         front.src = "wmxnSTEMimages/WomenInStem.jpg"
-        front.className = "img-fluid img-thumbnail col-3"
-        front.setAttribute('data-set', completeSpread[i].name)
+        front.className = "img-fluid img-thumbnail"
+      //  front.setAttribute('data-set', completeSpread[i].name)
+        front.classList.add('front')
         
+
         //cardElement.classList.add('card')
     
         let cardElement = document.createElement("img")
         cardElement.src = completeSpread[i].image
-        cardElement.className = "img-fluid img-thumbnail col-3"
+        cardElement.className = "img-fluid img-thumbnail inline"
         cardElement.setAttribute('data-set', completeSpread[i].name)
-        cardElement.classList.add('card')
+        cardElement.classList.add('back')
+
+        
         
         // have to add id to make sure that selected works
              
-        board.appendChild(front)
-        front.appendChild(cardElement)
+        /* board.appendChild(front)
+        front.appendChild(cardElement) */
+
+        board.appendChild(card)
+        card.appendChild(front)
+        card.appendChild(cardElement)
      
        }
     } 
 
+
     const selections = () => {
         board.addEventListener('click', event => {
             const clicked = event.target
-            const image = event.target.firstChild
+           // const image = event.target.parentNode.lastElementChild
             console.log(firstCardPicked)
             console.log(secondCardPicked)
-            console.log(image)
+            //console.log(image)
         
             if(clicked.nodeName === 'SECTION' || clicked === previousTarget){
                 return
@@ -161,17 +179,25 @@ const createSpread = () => {
                 console.log(numOfCardsPicked)
             } 
             if(numOfCardsPicked === 1){
-                firstCardPicked = clicked.dataset.set
-                //console.log(firstCardPicked)
-                clicked.classList.add('selected')
-                //clicked.insertBefore(clicked.firstChild, clicked)
-                //clicked.replaceWith(image)
+                firstCardPicked = clicked.parentNode.dataset.set
+                console.log(firstCardPicked)
+                clicked.parentNode.classList.add('selected')
+                //clicked.parentNode.lastElementChild.classList.add('selection')
+                clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
+                clicked.parentNode.lastElementChild.classList.add('selected')
+               //clicked.replaceWith(image)
                 //image.classList.add('selected')
-               // clicked.style.display = "none"
-               // clicked.lastElementChild.style.visibility = "visible"
+               clicked.style.display = "none"
+
+              //  clicked.zIndex = 0
+               //document.getElementsByClassName('.selection').style.visibility = "visible"
+               //clicked.parentNode.lastElementChild.style.visibility = "visible"
             }else if(numOfCardsPicked === 2){
-                     secondCardPicked = clicked.dataset.set
-                     clicked.classList.add('selected')
+                     secondCardPicked = clicked.parentNode.dataset.set
+                     clicked.parentNode.classList.add('selected')
+                     clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
+                     clicked.parentNode.lastElementChild.classList.add('selected').style.zIndex = "2"
+                     //clicked.style.display = "none"
                      //clicked.replaceWith(image)
                      //image.classList.add('selected')
                   //   console.log(secondCardPicked)
@@ -179,13 +205,14 @@ const createSpread = () => {
              if (firstCardPicked !== '' && secondCardPicked !== '') {
                if(firstCardPicked === secondCardPicked){
                    setTimeout(checkForMatch, delay)
+                   //getElementsByClassName('matched').remove()
                    setTimeout(resetRound, delay)
                 } else {
-                    //setTimeout(resetRound, delay)
-                    resetRound()
+                    setTimeout(resetRound, delay)
+                    //resetRound()
                 }
                }
-             previousTarget = clicked.dataset.set
+             previousTarget = clicked.parentNode.dataset.set
              console.log(previousTarget)
            })
         
@@ -195,6 +222,7 @@ const createSpread = () => {
              let selected = document.querySelectorAll('.selected')
             selected.forEach((cardElement) => {
                 cardElement.classList.add('matched')
+                //const matched = document.getElementsByClassName('matched')
                 //This will eventually create the bio card and removed from the gameboard
                 //image.remove()
             }) 
@@ -208,9 +236,11 @@ const createSpread = () => {
         
             let selected = document.querySelectorAll('.selected')
             selected.forEach(cardElement => {
-            
+                selected.parentNode.insertBefore(parentNode.lastElementChild, selected)
+                
             // write new function to bring back back of card
             cardElement.classList.remove('selected')
+           
            })
         
         }
