@@ -123,22 +123,16 @@ const createSpread = () => {
 
     for(let i=0; i < completeSpread.length; i++){
     
-        const card = document.createElement('div')
-        card.classList.add('card')
-        //card.className = "row-fluid d-inline-flex align-content-between flex-wrap"
-        card.className
-        card.setAttribute('data-set', completeSpread[i].name)
-
-
         const front = document.createElement('img')
         front.src = "wmxnSTEMimages/WomenInStem.jpg"
-        front.className = "img-fluid img-thumbnail"
+        front.className = "img-fluid img-thumbnail col-3"
         front.classList.add('front')
+        front.setAttribute('data-set', completeSpread[i].name)
         //cardElement.classList.add('card')
 
         let cardElement = document.createElement("img")
         cardElement.src = completeSpread[i].image
-        cardElement.className = "img-fluid img-thumbnail"
+        cardElement.className = "img-fluid img-thumbnail col-3"
         cardElement.setAttribute('data-set', completeSpread[i].name)
         cardElement.classList.add('back')
     
@@ -148,20 +142,19 @@ const createSpread = () => {
 
     //document.getElementById("gameboard").appendChild(cardElement)
     //board.appendChild(front)
-        board.appendChild(card)
-        card.appendChild(front)
-        card.appendChild(cardElement)
-    //front.appendChild(cardElement)
+        board.appendChild(front)
+        front.appendChild(cardElement)
+        //front.appendChild(cardElement)
  
     }
 } 
 const selections = () => {
         board.addEventListener('click', event => {
         const clicked = event.target
-        //console.log(firstCardPicked)
-        //console.log(secondCardPicked)
+        console.log(firstCardPicked)
+        console.log(secondCardPicked)
         //clicked.remove('front')
-        console.log(clicked.parentNode.dataset.set)
+        //console.log(clicked.parentNode.dataset.set)
     
         if(clicked.nodeName === 'SECTION' || clicked === previousTarget){
             return
@@ -170,19 +163,19 @@ const selections = () => {
             console.log(numOfCardsPicked)
         } 
         if(numOfCardsPicked === 1){
-            firstCardPicked = clicked.parentNode.dataset.set
+            firstCardPicked = clicked.dataset.set
             console.log(firstCardPicked)
-            clicked.parentNode.classList.add('selected')
-            clicked.style.display = "none"
-            clicked.parentNode.lastElementChild.style.visibility = "visible"
-            clicked.parentNode.lastElementChild.classList.add('selected')
+            clicked.classList.add('selected')
+            //clicked.style.display = "none"
+            //clicked.parentNode.lastElementChild.style.visibility = "visible"
+            clicked.classList.add('selected')
         } else if(numOfCardsPicked === 2){
-             secondCardPicked = clicked.parentNode.dataset.set
-             clicked.parentNode.classList.add('selected')
+             secondCardPicked = clicked.dataset.set
+             clicked.classList.add('selected')
              console.log(secondCardPicked)
-             clicked.style.display = "none"
-             clicked.parentNode.lastElementChild.style.visibility = "visible"
-             clicked.parentNode.lastElementChild.classList.add('selected')
+            // clicked.style.display = "none"
+            // clicked.parentNode.lastElementChild.style.visibility = "visible"
+             clicked.classList.add('selected')
     }
         if (firstCardPicked !== '' && secondCardPicked !== '') {
         if(firstCardPicked === secondCardPicked){
@@ -192,7 +185,7 @@ const selections = () => {
             setTimeout(resetRound, delay)
         }
     }
-        previousTarget = document.querySelectorAll('.selected')
+        previousTarget = clicked
         console.log(previousTarget)
    })
 
@@ -213,8 +206,8 @@ const selections = () => {
     previousTarget = null
 
     let selected = document.querySelectorAll('.selected')
-    selected.forEach(card => {
-        card.classList.remove('selected')
+    selected.forEach(cardElement => {
+        cardElement.classList.remove('selected')
 
     })
 
