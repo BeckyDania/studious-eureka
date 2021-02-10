@@ -119,106 +119,101 @@ board.className = 'board'
 board.className = "row-fluid d-flex justify-content-between align-items-center align-content-between flex-wrap"
 game.appendChild(board)
 
+
 const createSpread = () => {
 
     for(let i=0; i < completeSpread.length; i++){
-    
-        const card = document.createElement('div')
-        card.classList.add('card')
-        //card.className = "row-fluid d-inline-flex align-content-between flex-wrap"
-        card.className
-        card.setAttribute('data-set', completeSpread[i].name)
-
-
+        
         const front = document.createElement('img')
-        front.src = "wmxnSTEMimages/WomenInStem.jpg"
-        front.className = "img-fluid img-thumbnail"
         front.classList.add('front')
+        front.src = "wmxnSTEMimages/WomenInStem.jpg"
+        front.className = "img-fluid img-thumbnail col-3"
+        front.setAttribute('data-set', completeSpread[i].name)
+        
         //cardElement.classList.add('card')
-
+    
         let cardElement = document.createElement("img")
         cardElement.src = completeSpread[i].image
-        cardElement.className = "img-fluid img-thumbnail"
+        cardElement.className = "img-fluid img-thumbnail col-3"
         cardElement.setAttribute('data-set', completeSpread[i].name)
-        cardElement.classList.add('back')
-    
-    // have to add id to make sure that selected works
+        cardElement.classList.add('card')
+        
+        // have to add id to make sure that selected works
+             
+        board.appendChild(front)
+        front.appendChild(cardElement)
+     
+       }
+    } 
 
-    
-
-    //document.getElementById("gameboard").appendChild(cardElement)
-    //board.appendChild(front)
-        board.appendChild(card)
-        card.appendChild(front)
-        card.appendChild(cardElement)
-    //front.appendChild(cardElement)
- 
-    }
-} 
-const selections = () => {
+    const selections = () => {
         board.addEventListener('click', event => {
-        const clicked = event.target
-        //console.log(firstCardPicked)
-        //console.log(secondCardPicked)
-        //clicked.remove('front')
-        console.log(clicked.parentNode.dataset.set)
-    
-        if(clicked.nodeName === 'SECTION' || clicked === previousTarget){
-            return
-        } if(numOfCardsPicked < 2){
-            numOfCardsPicked++
-            console.log(numOfCardsPicked)
-        } 
-        if(numOfCardsPicked === 1){
-            firstCardPicked = clicked.parentNode.dataset.set
+            const clicked = event.target
+            const image = event.target.firstChild
             console.log(firstCardPicked)
-            clicked.parentNode.classList.add('selected')
-            clicked.style.display = "none"
-            clicked.parentNode.lastElementChild.style.visibility = "visible"
-            clicked.parentNode.lastElementChild.classList.add('selected')
-        } else if(numOfCardsPicked === 2){
-             secondCardPicked = clicked.parentNode.dataset.set
-             clicked.parentNode.classList.add('selected')
-             console.log(secondCardPicked)
-             clicked.style.display = "none"
-             clicked.parentNode.lastElementChild.style.visibility = "visible"
-             clicked.parentNode.lastElementChild.classList.add('selected')
-    }
-        if (firstCardPicked !== '' && secondCardPicked !== '') {
-        if(firstCardPicked === secondCardPicked){
-           setTimeout(checkForMatch, delay)
-           setTimeout(resetRound, delay)
-        } else {
-            setTimeout(resetRound, delay)
+            console.log(secondCardPicked)
+            console.log(image)
+        
+            if(clicked.nodeName === 'SECTION' || clicked === previousTarget){
+                return
+            } if(numOfCardsPicked < 2){
+                numOfCardsPicked++
+                console.log(numOfCardsPicked)
+            } 
+            if(numOfCardsPicked === 1){
+                firstCardPicked = clicked.dataset.set
+                //console.log(firstCardPicked)
+                clicked.classList.add('selected')
+                //clicked.insertBefore(clicked.firstChild, clicked)
+                //clicked.replaceWith(image)
+                //image.classList.add('selected')
+               // clicked.style.display = "none"
+               // clicked.lastElementChild.style.visibility = "visible"
+            }else if(numOfCardsPicked === 2){
+                     secondCardPicked = clicked.dataset.set
+                     clicked.classList.add('selected')
+                     //clicked.replaceWith(image)
+                     //image.classList.add('selected')
+                  //   console.log(secondCardPicked)
+             }
+             if (firstCardPicked !== '' && secondCardPicked !== '') {
+               if(firstCardPicked === secondCardPicked){
+                   setTimeout(checkForMatch, delay)
+                   setTimeout(resetRound, delay)
+                } else {
+                    //setTimeout(resetRound, delay)
+                    resetRound()
+                }
+               }
+             previousTarget = clicked.dataset.set
+             console.log(previousTarget)
+           })
+        
         }
-    }
-        previousTarget = document.querySelectorAll('.selected')
-        console.log(previousTarget)
-   })
-
-}
-
-    const checkForMatch = () => {
-    let selected = document.querySelectorAll('.selected')
-    selected.forEach((card) => {
-        card.classList.add('matched')
-        //This will eventually create the bio card and removed from the gameboard
-    }) 
-}
-
-    const resetRound = () => {
-    firstCardPicked = ''
-    secondCardPicked = ''
-    numOfCardsPicked = 0
-    previousTarget = null
-
-    let selected = document.querySelectorAll('.selected')
-    selected.forEach(card => {
-        card.classList.remove('selected')
-
-    })
-
-}
+        
+        const checkForMatch = () => {
+             let selected = document.querySelectorAll('.selected')
+            selected.forEach((cardElement) => {
+                cardElement.classList.add('matched')
+                //This will eventually create the bio card and removed from the gameboard
+                //image.remove()
+            }) 
+        }
+        
+        const resetRound = () => {
+            firstCardPicked = ''
+            secondCardPicked = ''
+            numOfCardsPicked = 0
+            previousTarget = null
+        
+            let selected = document.querySelectorAll('.selected')
+            selected.forEach(cardElement => {
+            
+            // write new function to bring back back of card
+            cardElement.classList.remove('selected')
+           })
+        
+        }
 
 createSpread()
 selections()
