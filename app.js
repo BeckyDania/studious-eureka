@@ -166,12 +166,11 @@ const createSpread = () => {
     const selections = () => {
         board.addEventListener('click', event => {
             const clicked = event.target
-           // const image = event.target.parentNode.lastElementChild
             console.log(firstCardPicked)
             console.log(secondCardPicked)
 
         console.log(clicked)
-            if(clicked.nodeName === 'SECTION' || clicked === previousTarget){
+            if(clicked.nodeName === 'SECTION' || clicked === previousTarget || clicked.parentNode.parentNode.classList.contains('selected')){
                 return
             } if(numOfCardsPicked < 2){
                 numOfCardsPicked++
