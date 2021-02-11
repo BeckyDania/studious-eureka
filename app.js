@@ -119,8 +119,18 @@ board.className = 'board'
 //board.className = "row-fluid d-flex justify-content-between align-items-center align-content-between flex-wrap"
 board.className = "row-fluid d-flex flex-wrap position-relative grid"
 
+const startBtn = document.createElement('button')
+startBtn.innerHTML = "Women In Stem"
+
+//startBtn.addEventListener("click", createSpread)
+//Will style startBtn - STYLE NOW - too small to view
+// This will appear under the study guide carousel
+
+
+game.appendChild(startBtn)
 game.appendChild(board)
 
+//create function to press starBtn to create spread
 
 const createSpread = () => {
 
@@ -169,7 +179,7 @@ const createSpread = () => {
             console.log(firstCardPicked)
             console.log(secondCardPicked)
 
-        console.log(clicked)
+            //console.log(clicked)
             if(clicked.nodeName === 'SECTION' || clicked === previousTarget || clicked.parentNode.parentNode.classList.contains('selected')){
                 return
             } if(numOfCardsPicked < 2){
@@ -211,7 +221,7 @@ const createSpread = () => {
         }
         
         const resetRound = () => {
-            console.log("resetting")
+           // console.log("resetting")
             firstCardPicked = ''
             secondCardPicked = ''
             numOfCardsPicked = 0
@@ -220,20 +230,21 @@ const createSpread = () => {
             document.querySelectorAll('.selected')
             
             let front = document.querySelectorAll('.front')
-            console.log(front)
+           // console.log(front)
             
             front.forEach(card => {
-                    console.log(card)
+             //       console.log(card)
                card.style.visibility = "initial"
                card.parentNode.parentNode.classList.remove('selected')
                    })
         
         }
 
-    
+startBtn.addEventListener("click", () => {
+//startGame()
 createSpread()
 selections()
 checkForMatch()
 resetRound()
 
- 
+})
