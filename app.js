@@ -51,7 +51,7 @@ const cards = [
     {
         name: "Farida Nana Efua Bedwei",
         image: faridaBedwei,
-        biography: farBeLink,
+        biography: farBeBio,
         link: farBeLink
     },
     {
@@ -107,7 +107,7 @@ let numOfCardsPicked = 0
 let previousTarget = null
 let numOfCardsRemaining = completeSpread.length
 console.log(numOfCardsRemaining)
-let delay = 1000
+let delay = 10000
 
 
 
@@ -157,7 +157,7 @@ const createSpread = () => {
         //cardElement.classList.add('card')
         const flipBack = document.createElement('div')
         const cardElement = document.createElement("img")
-        flipFront.setAttribute('data-set', completeSpread[i].name)
+        flipBack.setAttribute('data-set', completeSpread[i].name)
         flipBack.appendChild(cardElement)
         cardElement.src = completeSpread[i].image
         cardElement.className = "img-fluid img-thumbnail inline"
@@ -203,6 +203,7 @@ const createSpread = () => {
                if(firstCardPicked === secondCardPicked){
                    setTimeout(checkForMatch, delay)
                    //getElementsByClassName('matched').remove()
+                   // Put the study guide here?
                    setTimeout(resetRound, delay)
                 } else {
                     setTimeout(resetRound, delay)
@@ -219,11 +220,65 @@ const createSpread = () => {
              let selected = document.querySelectorAll('.selected')
             selected.forEach((card) => {
                 card.classList.add('matched')
+                createStudyGuide()
                 card.remove()
                 numOfCardsRemaining-=1
                 console.log(numOfCardsRemaining)
+            
+            // 4 divs - image - bio - link - include btn 
+            // btn - will include eventlistener to remove card - 
+            //resume game - no need to restart game - possibly need selections
+
             }) 
         }
+const createStudyGuide = () => {
+
+        //let matched = document.querySelectorAll('.front')
+
+        //console.log(matched)
+            completeSpread.forEach((card) => {
+
+            const studyGuide = document.createElement('div')
+            studyGuide.className = "card"
+            studyGuide.style = "width: 18rem"
+
+            const cardImage = document.createElement("img")
+            cardImage.setAttribute('data-set', card.name)
+            cardImage.className = "img-fluid img-thumbnail"
+            cardImage.src = card.image
+            cardImage.classList = "card-img-top"
+            studyGuide.appendChild(cardImage)
+
+
+
+            const cardBody = document.createElement('div')
+            cardBody.className = "card-body"
+            let h5 = document.createElement('h5')
+            h5.classList = "card-title"
+            h5.innerText = card.name
+            let p = document.createElement('p')
+            p.innerText = card.biography
+            let link = document.createElement("a")
+            link.setAttribute("href", card.link)
+            link.innerText = "Link for more information."
+           // let nextBtn = document.createElement('button')
+          //  nextBtn.innerText = "Click to continue game"
+
+
+            const game = document.getElementById("gameboard")
+            game.appendChild(studyGuide)
+            studyGuide.appendChild(cardImage)
+            studyGuide.appendChild(cardBody)
+            cardBody.appendChild(h5)
+            cardBody.appendChild(p)
+            cardBody.appendChild(link)
+            //cardBody.appendChild(nextBtn)
+
+
+    })
+}
+
+
         
         const resetRound = () => {
            // console.log("resetting")
@@ -236,10 +291,8 @@ const createSpread = () => {
             document.querySelectorAll('.selected')
             console.log(numOfCardsRemaining)
             let front = document.querySelectorAll('.front')
-           // console.log(front)
             
             front.forEach(card => {
-             //       console.log(card)
                card.style.visibility = "initial"
                card.parentNode.parentNode.classList.remove('selected')
                    })
@@ -248,30 +301,10 @@ const createSpread = () => {
 
         const newGame = () => {
         if(numOfCardsRemaining === 0){
-            //Let's hold off on the new game button
-            
-        //Instead let's reset the entire game
-        // Display the following text
-        // Thank you for recognizing these accomplish Women in Stem!! Cheers!!
-        //Or I can just put this as a background text
-
-        // make the start btn reappear
         startBtn.style.visibility = "visible"
-        /* let p = document.createElement(p)
-        p.innerHTML = "Women in STEM"
-        p.image.src = "https://giphy.com/embed/3dkZSFc0Yn24DebLb3"
-        /* <div style="width:100%;height:0;padding-bottom:144%;position:relative;"><iframe src="https://giphy.com/embed/3dkZSFc0Yn24DebLb3" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/Massivesci-3dkZSFc0Yn24DebLb3">via GIPHY</a></p> */
-        //game.appendChild(p) 
-
-            //new Game code
-        /* const game = document.getElementById("gameboard")
-        const newGameBtn = document.createElement('button')
-        newGameBtn.innerHTML = "Play Again?"
-        game.appendChild(newGameBtn) */
-        
-        
         } 
     }
+
 
 
     startBtn.addEventListener("click", () => {
@@ -282,5 +315,6 @@ const createSpread = () => {
 
 selections()
 checkForMatch()
+createStudyGuide()
 resetRound()
 newGame()
