@@ -257,7 +257,13 @@ const createSpread = () => {
 
         // make the start btn reappear
         startBtn.style.visibility = "visible"
+        /* let p = document.createElement(p)
+        p.innerHTML = "Women in STEM"
+        p.image.src = "https://giphy.com/embed/3dkZSFc0Yn24DebLb3"
+        /* <div style="width:100%;height:0;padding-bottom:144%;position:relative;"><iframe src="https://giphy.com/embed/3dkZSFc0Yn24DebLb3" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/Massivesci-3dkZSFc0Yn24DebLb3">via GIPHY</a></p> */
+        //game.appendChild(p) 
 
+            //new Game code
         /* const game = document.getElementById("gameboard")
         const newGameBtn = document.createElement('button')
         newGameBtn.innerHTML = "Play Again?"
@@ -268,9 +274,9 @@ const createSpread = () => {
     }
 
 
-startBtn.addEventListener("click", () => {
+    startBtn.addEventListener("click", () => {
 //startGame()
-createSpread()
+    createSpread()
     startBtn.style.visibility = "hidden"
 })
 
