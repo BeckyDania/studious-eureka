@@ -248,12 +248,20 @@ const createSpread = () => {
 
         const newGame = () => {
         if(numOfCardsRemaining === 0){
+            //Let's hold off on the new game button
+            
+        //Instead let's reset the entire game
+        // Display the following text
+        // Thank you for recognizing these accomplish Women in Stem!! Cheers!!
+        //Or I can just put this as a background text
 
+        // make the start btn reappear
+        startBtn.style.visibility = "visible"
 
-        const game = document.getElementById("gameboard")
+        /* const game = document.getElementById("gameboard")
         const newGameBtn = document.createElement('button')
         newGameBtn.innerHTML = "Play Again?"
-        game.appendChild(newGameBtn)
+        game.appendChild(newGameBtn) */
         
         
         } 
