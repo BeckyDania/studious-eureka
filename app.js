@@ -105,7 +105,8 @@ let firstCardPicked = ''
 let secondCardPicked = ''
 let numOfCardsPicked = 0
 let previousTarget = null
-
+let numOfCardsRemaining = completeSpread.length
+console.log(numOfCardsRemaining)
 let delay = 1000
 
 
@@ -201,7 +202,7 @@ const createSpread = () => {
              if (firstCardPicked !== '' && secondCardPicked !== '') {
                if(firstCardPicked === secondCardPicked){
                    setTimeout(checkForMatch, delay)
-                   getElementsByClassName('matched').remove()
+                   //getElementsByClassName('matched').remove()
                    setTimeout(resetRound, delay)
                 } else {
                     setTimeout(resetRound, delay)
@@ -212,11 +213,15 @@ const createSpread = () => {
            })
         
         }
+
+
         const checkForMatch = () => {
              let selected = document.querySelectorAll('.selected')
             selected.forEach((card) => {
                 card.classList.add('matched')
                 card.remove()
+                numOfCardsRemaining-=1
+                console.log(numOfCardsRemaining)
             }) 
         }
         
@@ -226,9 +231,10 @@ const createSpread = () => {
             secondCardPicked = ''
             numOfCardsPicked = 0
             previousTarget = null
+            newGame()
             
             document.querySelectorAll('.selected')
-            
+            console.log(numOfCardsRemaining)
             let front = document.querySelectorAll('.front')
            // console.log(front)
             
@@ -240,11 +246,27 @@ const createSpread = () => {
         
         }
 
+        const newGame = () => {
+        if(numOfCardsRemaining === 0){
+
+
+        const game = document.getElementById("gameboard")
+        const newGameBtn = document.createElement('button')
+        newGameBtn.innerHTML = "Play Again?"
+        game.appendChild(newGameBtn)
+        
+        
+        } 
+    }
+
+
 startBtn.addEventListener("click", () => {
 //startGame()
 createSpread()
+    startBtn.style.visibility = "hidden"
+})
+
 selections()
 checkForMatch()
 resetRound()
-
-})
+newGame()
