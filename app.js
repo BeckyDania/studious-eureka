@@ -141,7 +141,7 @@ const createSpread = () => {
         front.className = "img-fluid img-thumbnail"
         flipFront.setAttribute('data-set', completeSpread[i].name)
         front.classList.add('front')
-        front.style.visibility = "visible"
+        //front.style.visibility = "visible | hidden | initial | inherit"
         
 
         //cardElement.classList.add('card')
@@ -176,7 +176,7 @@ const createSpread = () => {
             console.log(firstCardPicked)
             console.log(secondCardPicked)
             //console.log(image)
-        
+        console.log(clicked)
             if(clicked.nodeName === 'SECTION' || clicked === previousTarget){
                 return
             } if(numOfCardsPicked < 2){
@@ -186,8 +186,8 @@ const createSpread = () => {
             if(numOfCardsPicked === 1){
                 firstCardPicked = clicked.parentNode.dataset.set
                 console.log(firstCardPicked)
-                clicked.parentNode.classList.add('selected')
-               // clicked.classList.add('selected')
+                //clicked.parentNode.classList.add('selected')
+               clicked.classList.add('selected')
                 //clicked.parentNode.lastElementChild.classList.add('selection')
               //  clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
                //clicked.parentNode.lastElementChild.classList.add('select')
@@ -198,8 +198,8 @@ const createSpread = () => {
                //clicked.parentNode.lastElementChild.style.visibility = "visible"
             }else if(numOfCardsPicked === 2){
                      secondCardPicked = clicked.parentNode.dataset.set
-                     clicked.parentNode.classList.add('selected')
-                   //  clicked.classList.add('selected')
+                    // clicked.parentNode.classList.add('selected')
+                    clicked.classList.add('selected')
                     clicked.style.visibility = "hidden"
                 //     clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
                    //  clicked.parentNode.lastElementChild.classList.add('select')
@@ -232,18 +232,26 @@ const createSpread = () => {
         }
         
         const resetRound = () => {
+            console.log("resetting")
             firstCardPicked = ''
             secondCardPicked = ''
             numOfCardsPicked = 0
             previousTarget = null
-        
-            let selected = document.querySelectorAll('selected')
-            selected.forEach(cardElement => {
-
-            // Make clicked item visible when no match
-            selected.style.visibility = "initial"
+            //document.getElementsByClassName('front selected').style.visibility = "visible"
+          //  document.querySelectorAll('.selected').classList.remove('.selected')
+            let front = document.querySelectorAll('.front')
+            console.log(front)
+            front.forEach(card => {
+           // if(document.getElementsByClassName('front selected')){
+                    console.log(card)
+                    // Make clicked item visible when no match
+               card.style.visibility = "initial"
+               card.classList.remove('.selected')
+             // }
+            
+            
             // write new function to bring back back of card
-           cardElement.classList.remove('selected')
+          
            
            })
         
