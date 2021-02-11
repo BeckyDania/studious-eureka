@@ -106,7 +106,7 @@ let secondCardPicked = ''
 let numOfCardsPicked = 0
 let previousTarget = null
 
-let delay = 10
+let delay = 1000
 
 
 
@@ -126,11 +126,10 @@ const createSpread = () => {
 
     for(let i=0; i < completeSpread.length; i++){
         
-       const card = document.createElement('div')
-        card.classList.add('card')
+        const card = document.createElement('div')
         card.className = "col-fluid-3"
         card.setAttribute('data-set', completeSpread[i].name)
- 
+        card.classList.add('card')
 
 
 
@@ -155,11 +154,6 @@ const createSpread = () => {
         cardElement.classList.add('back')
 
         
-        
-        // have to add id to make sure that selected works
-             
-        /* board.appendChild(front)
-        front.appendChild(cardElement) */
 
         board.appendChild(card)
         card.appendChild(flipFront)
@@ -175,7 +169,7 @@ const createSpread = () => {
            // const image = event.target.parentNode.lastElementChild
             console.log(firstCardPicked)
             console.log(secondCardPicked)
-            //console.log(image)
+
         console.log(clicked)
             if(clicked.nodeName === 'SECTION' || clicked === previousTarget){
                 return
@@ -186,33 +180,22 @@ const createSpread = () => {
             if(numOfCardsPicked === 1){
                 firstCardPicked = clicked.parentNode.dataset.set
                 console.log(firstCardPicked)
-                //clicked.parentNode.classList.add('selected')
-               clicked.classList.add('selected')
-                //clicked.parentNode.lastElementChild.classList.add('selection')
-              //  clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
-               //clicked.parentNode.lastElementChild.classList.add('select')
-            
-             clicked.style.visibility = "hidden"
+                clicked.parentNode.parentNode.classList.add('selected')
+                clicked.style.visibility = "hidden"
 
-               //document.getElementsByClassName('.selection').style.visibility = "visible"
-               //clicked.parentNode.lastElementChild.style.visibility = "visible"
             }else if(numOfCardsPicked === 2){
                      secondCardPicked = clicked.parentNode.dataset.set
-                    // clicked.parentNode.classList.add('selected')
-                    clicked.classList.add('selected')
+                    clicked.parentNode.parentNode.classList.add('selected')
                     clicked.style.visibility = "hidden"
-                //     clicked.parentNode.insertBefore(clicked.parentNode.lastElementChild, clicked)
-                   //  clicked.parentNode.lastElementChild.classList.add('select')
     
              }
              if (firstCardPicked !== '' && secondCardPicked !== '') {
                if(firstCardPicked === secondCardPicked){
                    setTimeout(checkForMatch, delay)
-                //   getElementsByClassName('matched').remove()
+                   getElementsByClassName('matched').remove()
                    setTimeout(resetRound, delay)
                 } else {
                     setTimeout(resetRound, delay)
-                    //resetRound()
                 }
                }
              previousTarget = clicked.parentNode.dataset.set
@@ -220,14 +203,11 @@ const createSpread = () => {
            })
         
         }
-        
         const checkForMatch = () => {
              let selected = document.querySelectorAll('.selected')
-            selected.forEach((cardElement) => {
-                cardElement.classList.add('matched')
-                //const matched = document.getElementsByClassName('matched')
-                //This will eventually create the bio card and removed from the gameboard
-                //image.remove()
+            selected.forEach((card) => {
+                card.classList.add('matched')
+                card.remove()
             }) 
         }
         
@@ -237,23 +217,17 @@ const createSpread = () => {
             secondCardPicked = ''
             numOfCardsPicked = 0
             previousTarget = null
-            //document.getElementsByClassName('front selected').style.visibility = "visible"
-          //  document.querySelectorAll('.selected').classList.remove('.selected')
+            
+            document.querySelectorAll('.selected')
+            
             let front = document.querySelectorAll('.front')
             console.log(front)
+            
             front.forEach(card => {
-           // if(document.getElementsByClassName('front selected')){
                     console.log(card)
-                    // Make clicked item visible when no match
                card.style.visibility = "initial"
-               card.classList.remove('.selected')
-             // }
-            
-            
-            // write new function to bring back back of card
-          
-           
-           })
+               card.parentNode.parentNode.classList.remove('selected')
+                   })
         
         }
 
