@@ -73,7 +73,7 @@ const cards = [
         link: marMirLink
     },
     {
-        name: "Grace Brewster Murray Hopper ",
+        name: "Grace Brewster Murray Hopper",
         image: graceHopper,
         biography: graceHopBio,
         link: graceHopLink
@@ -107,7 +107,7 @@ let numOfCardsPicked = 0
 let previousTarget = null
 let numOfCardsRemaining = completeSpread.length
 console.log(numOfCardsRemaining)
-let delay = 10000
+let delay = 1000
 
 
 
@@ -120,18 +120,72 @@ board.className = 'board'
 //board.className = "row-fluid d-flex justify-content-between align-items-center align-content-between flex-wrap"
 board.className = "row-fluid d-flex flex-wrap position-relative grid"
 
+const startGameDiv = document.createElement('div')
+startGameDiv.id = "startgame"
+game.appendChild(startGameDiv)
+
 const startBtn = document.createElement('button')
 startBtn.innerHTML = "Women In Stem"
+startGameDiv.appendChild(startBtn)
 
-//startBtn.addEventListener("click", createSpread)
-//Will style startBtn - STYLE NOW - too small to view
-// This will appear under the study guide carousel
+const cardDiv = document.createElement('div')
+cardDiv.id = "cardStudyGuide"
+cardDiv.className = "card"
+startGameDiv.appendChild(cardDiv)
 
 
-game.appendChild(startBtn)
+/* const carouselDiv = document.createElement('div')
+carouselDiv.id = "carousel study guide"
+carouselDiv.className = "carousel slide"
+carouselDiv.setAttribute("data-ride", "carousel")
+startGameDiv.appendChild(carouselDiv) */
+
+/* const innerCarousel = document.createElement('div')
+innerCarousel.id = "start"
+innerCarousel.className = "carousel-inner"
+carouselDiv.appendChild(innerCarousel)  */
+
+
+
+
 game.appendChild(board)
 
 //create function to press starBtn to create spread
+
+/* const createSlideShow = () =>{
+ //function showSlide(slideIndex) {
+    let currentSlide = 1
+    const slides = document.getElementsByClassName('carouselExample');
+    if (slideIndex > slides.length) { 
+        let currentSlide = 1 
+    }
+    if (slideIndex < 1) { 
+        let currentSlide = slides.length 
+    }
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none'
+    }
+    slides[currentSlide - 1].style.display = 'flex'
+  }
+  
+  
+  const nextSlide = () => {
+    showSlide(currentSlide += 1);
+  }
+  
+  const previousSlide = () => {
+    showSlide(currentSlide -= 1);
+  }
+  
+  window.onload = function () {
+    showSlide(currentSlide);
+    document.getElementById('carousel-control-prev').addEventListener('click', function () {
+      previousSlide();
+    })
+    document.getElementById("carousel-control-next").addEventListener('click', function () {
+      nextSlide();
+    })
+  }  */
 
 const createSpread = () => {
 
@@ -151,7 +205,6 @@ const createSpread = () => {
         front.className = "img-fluid img-thumbnail"
         flipFront.setAttribute('data-set', completeSpread[i].name)
         front.classList.add('front')
-        //front.style.visibility = "visible | hidden | initial | inherit"
         
 
         //cardElement.classList.add('card')
@@ -202,8 +255,7 @@ const createSpread = () => {
              if (firstCardPicked !== '' && secondCardPicked !== '') {
                if(firstCardPicked === secondCardPicked){
                    setTimeout(checkForMatch, delay)
-                   //getElementsByClassName('matched').remove()
-                   // Put the study guide here?
+                  
                    setTimeout(resetRound, delay)
                 } else {
                     setTimeout(resetRound, delay)
@@ -231,23 +283,28 @@ const createSpread = () => {
 
             }) 
         }
-const createStudyGuide = () => {
 
+
+  const createStudyGuide = () => {
+
+   
         //let matched = document.querySelectorAll('.front')
 
         //console.log(matched)
-            completeSpread.forEach((card) => {
-
+            cards.forEach((card) => {
+                        
             const studyGuide = document.createElement('div')
-            studyGuide.className = "card"
+            studyGuide.className = "card row-fluid"
+            studyGuide.id = "studyguide"
+           // studyGuide.className = ""
             studyGuide.style = "width: 18rem"
-
+            
             const cardImage = document.createElement("img")
             cardImage.setAttribute('data-set', card.name)
-            cardImage.className = "img-fluid img-thumbnail"
+            cardImage.className = "d-block img-fluid img-thumbnail"
             cardImage.src = card.image
             cardImage.classList = "card-img-top"
-            studyGuide.appendChild(cardImage)
+            //studyGuide.appendChild(cardImage)
 
 
 
@@ -264,19 +321,20 @@ const createStudyGuide = () => {
            // let nextBtn = document.createElement('button')
           //  nextBtn.innerText = "Click to continue game"
 
-
-            const game = document.getElementById("gameboard")
-            game.appendChild(studyGuide)
-            studyGuide.appendChild(cardImage)
+            //const innerCarousel = document.createElement('div')
+            const cardDiv = document.getElementById("cardStudyGuide")
+            cardDiv.appendChild(studyGuide)
+          //  studyGuide.appendChild(cardImage)
             studyGuide.appendChild(cardBody)
+            cardBody.appendChild(cardImage)
             cardBody.appendChild(h5)
             cardBody.appendChild(p)
             cardBody.appendChild(link)
             //cardBody.appendChild(nextBtn)
 
-
-    })
-}
+ 
+   })
+} 
 
 
         
@@ -302,6 +360,7 @@ const createStudyGuide = () => {
         const newGame = () => {
         if(numOfCardsRemaining === 0){
         startBtn.style.visibility = "visible"
+        cardDiv.style.visibility = "visible"
         } 
     }
 
@@ -310,7 +369,9 @@ const createStudyGuide = () => {
     startBtn.addEventListener("click", () => {
 //startGame()
     createSpread()
-    startBtn.style.visibility = "hidden"
+    startGameDiv.style.visibility = "hidden"
+    const carouselDiv = document.getElementById('carousel study guide')
+    cardDiv.style.visibility = "hidden"
 })
 
 selections()
