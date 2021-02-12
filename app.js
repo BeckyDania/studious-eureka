@@ -128,6 +128,102 @@ startGameDiv.appendChild(cardDiv)
 
 game.appendChild(board)
 
+const createStudyGuide = () => {
+
+    cards.forEach((card) => {
+                
+    const studyGuide = document.createElement('div')
+    studyGuide.className = "card row-fluid"
+    studyGuide.id = "studyguide"
+    studyGuide.style = "width: 30rem"
+    
+    const cardImage = document.createElement("img")
+    cardImage.setAttribute('data-set', card.name)
+    cardImage.className = "d-block img-fluid img-thumbnail"
+    cardImage.src = card.image
+    cardImage.classList = "card-img-top"
+
+    const cardBody = document.createElement('div')
+    cardBody.className = "card-body"
+    let h5 = document.createElement('h5')
+    h5.classList = "card-title"
+    h5.innerText = card.name
+    let p = document.createElement('p')
+    p.innerText = card.biography
+    let link = document.createElement("a")
+    link.setAttribute("href", card.link)
+    link.innerText = "Link for more information."
+
+
+    const controls = document.createElement("div")
+    const prevControl = document.createElement("button")
+    prevControl.setAttribute("href", "#")
+    prevControl.className = "previous"
+    prevControl.innerHTML = ">&laquo"
+    prevControl.innerText = "Previous"
+    
+    const nextControl = document.createElement("button")
+    nextControl.setAttribute("href", "#")
+    nextControl.className = "next"
+    nextControl.innerHTML = "&raquo"
+    nextControl.innerText = "Next"
+
+  
+    const cardDiv = document.getElementById("cardStudyGuide")
+    cardDiv.appendChild(studyGuide)
+    studyGuide.appendChild(cardBody)
+    cardBody.appendChild(cardImage)
+    cardBody.appendChild(h5)
+    cardBody.appendChild(p)
+    cardBody.appendChild(link)
+    cardBody.appendChild(controls)
+    controls.appendChild(prevControl)
+    controls.appendChild(nextControl)
+
+})
+} 
+
+
+
+/* const createSlideShow = () =>{
+//function showSlide(slideIndex) {
+let currentSlide = 1
+const slides = document.getElementsByClassName('carouselExample');
+if (slideIndex > slides.length) { 
+let currentSlide = 1 
+}
+if (slideIndex < 1) { 
+let currentSlide = slides.length 
+}
+for (let i = 0; i < slides.length; i++) {
+slides[i].style.display = 'none'
+}
+slides[currentSlide - 1].style.display = 'flex'
+}
+
+
+const nextSlide = () => {
+showSlide(currentSlide += 1);
+}
+
+const previousSlide = () => {
+showSlide(currentSlide -= 1);
+}
+
+window.onload = function () {
+showSlide(currentSlide);
+document.getElementById('carousel-control-prev').addEventListener('click', function () {
+previousSlide();
+})
+document.getElementById("carousel-control-next").addEventListener('click', function () {
+nextSlide();
+})
+}  */
+
+
+
+
+
 const createSpread = () => {
 
     for(let i=0; i < completeSpread.length; i++){
@@ -216,77 +312,6 @@ const createSpread = () => {
         }
 
 
-  const createStudyGuide = () => {
-
-            cards.forEach((card) => {
-                        
-            const studyGuide = document.createElement('div')
-            studyGuide.className = "card row-fluid"
-            studyGuide.id = "studyguide"
-            studyGuide.style = "width: 18rem"
-            
-            const cardImage = document.createElement("img")
-            cardImage.setAttribute('data-set', card.name)
-            cardImage.className = "d-block img-fluid img-thumbnail"
-            cardImage.src = card.image
-            cardImage.classList = "card-img-top"
-
-            const cardBody = document.createElement('div')
-            cardBody.className = "card-body"
-            let h5 = document.createElement('h5')
-            h5.classList = "card-title"
-            h5.innerText = card.name
-            let p = document.createElement('p')
-            p.innerText = card.biography
-            let link = document.createElement("a")
-            link.setAttribute("href", card.link)
-            link.innerText = "Link for more information."
-          
-            const cardDiv = document.getElementById("cardStudyGuide")
-            cardDiv.appendChild(studyGuide)
-            studyGuide.appendChild(cardBody)
-            cardBody.appendChild(cardImage)
-            cardBody.appendChild(h5)
-            cardBody.appendChild(p)
-            cardBody.appendChild(link)
-
-   })
-} 
-
-/* const createSlideShow = () =>{
- //function showSlide(slideIndex) {
-    let currentSlide = 1
-    const slides = document.getElementsByClassName('carouselExample');
-    if (slideIndex > slides.length) { 
-        let currentSlide = 1 
-    }
-    if (slideIndex < 1) { 
-        let currentSlide = slides.length 
-    }
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'none'
-    }
-    slides[currentSlide - 1].style.display = 'flex'
-  }
-  
-  
-  const nextSlide = () => {
-    showSlide(currentSlide += 1);
-  }
-  
-  const previousSlide = () => {
-    showSlide(currentSlide -= 1);
-  }
-  
-  window.onload = function () {
-    showSlide(currentSlide);
-    document.getElementById('carousel-control-prev').addEventListener('click', function () {
-      previousSlide();
-    })
-    document.getElementById("carousel-control-next").addEventListener('click', function () {
-      nextSlide();
-    })
-  }  */
         
         const resetRound = () => {
             firstCardPicked = ''
@@ -323,8 +348,8 @@ const createSpread = () => {
     cardDiv.style.visibility = "hidden"
 })
 
+createStudyGuide()
 selections()
 checkForMatch()
-createStudyGuide()
 resetRound()
 newGame()
