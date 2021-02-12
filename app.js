@@ -93,13 +93,11 @@ const cards = [
 
 ]
 
-//Duplicate cards
 const completeSpread = cards.concat(cards)
 console.table(completeSpread)
 
-//randomize cards
 completeSpread.sort(() => 0.5 - Math.random())
-//console.table(cards)
+
 
 let firstCardPicked = ''
 let secondCardPicked = ''
@@ -109,15 +107,10 @@ let numOfCardsRemaining = completeSpread.length
 console.log(numOfCardsRemaining)
 let delay = 1000
 
-
-
-//This works - prints image, full bio and name
-//console.table(cards[0])
-
 const game = document.getElementById("gameboard")
 const board = document.createElement('section')
 board.className = 'board'
-//board.className = "row-fluid d-flex justify-content-between align-items-center align-content-between flex-wrap"
+
 board.className = "row-fluid d-flex flex-wrap position-relative grid"
 
 const startGameDiv = document.createElement('div')
@@ -133,59 +126,7 @@ cardDiv.id = "cardStudyGuide"
 cardDiv.className = "card"
 startGameDiv.appendChild(cardDiv)
 
-
-/* const carouselDiv = document.createElement('div')
-carouselDiv.id = "carousel study guide"
-carouselDiv.className = "carousel slide"
-carouselDiv.setAttribute("data-ride", "carousel")
-startGameDiv.appendChild(carouselDiv) */
-
-/* const innerCarousel = document.createElement('div')
-innerCarousel.id = "start"
-innerCarousel.className = "carousel-inner"
-carouselDiv.appendChild(innerCarousel)  */
-
-
-
-
 game.appendChild(board)
-
-//create function to press starBtn to create spread
-
-/* const createSlideShow = () =>{
- //function showSlide(slideIndex) {
-    let currentSlide = 1
-    const slides = document.getElementsByClassName('carouselExample');
-    if (slideIndex > slides.length) { 
-        let currentSlide = 1 
-    }
-    if (slideIndex < 1) { 
-        let currentSlide = slides.length 
-    }
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'none'
-    }
-    slides[currentSlide - 1].style.display = 'flex'
-  }
-  
-  
-  const nextSlide = () => {
-    showSlide(currentSlide += 1);
-  }
-  
-  const previousSlide = () => {
-    showSlide(currentSlide -= 1);
-  }
-  
-  window.onload = function () {
-    showSlide(currentSlide);
-    document.getElementById('carousel-control-prev').addEventListener('click', function () {
-      previousSlide();
-    })
-    document.getElementById("carousel-control-next").addEventListener('click', function () {
-      nextSlide();
-    })
-  }  */
 
 const createSpread = () => {
 
@@ -196,8 +137,6 @@ const createSpread = () => {
         card.setAttribute('data-set', completeSpread[i].name)
         card.classList.add('card')
 
-
-
         const flipFront = document.createElement('div')
         const front = document.createElement('img')
         flipFront.appendChild(front)
@@ -205,7 +144,6 @@ const createSpread = () => {
         front.className = "img-fluid img-thumbnail"
         flipFront.setAttribute('data-set', completeSpread[i].name)
         front.classList.add('front')
-        
 
         //cardElement.classList.add('card')
         const flipBack = document.createElement('div')
@@ -216,8 +154,6 @@ const createSpread = () => {
         cardElement.className = "img-fluid img-thumbnail inline"
         cardElement.setAttribute('data-set', completeSpread[i].name)
         cardElement.classList.add('back')
-
-        
 
         board.appendChild(card)
         card.appendChild(flipFront)
@@ -260,7 +196,7 @@ const createSpread = () => {
                 } else {
                     setTimeout(resetRound, delay)
                 }
-               }
+             }
              previousTarget = clicked.parentNode.dataset.set
              console.log(previousTarget)
            })
@@ -276,27 +212,17 @@ const createSpread = () => {
                 card.remove()
                 numOfCardsRemaining-=1
                 console.log(numOfCardsRemaining)
-            
-            // 4 divs - image - bio - link - include btn 
-            // btn - will include eventlistener to remove card - 
-            //resume game - no need to restart game - possibly need selections
-
             }) 
         }
 
 
   const createStudyGuide = () => {
 
-   
-        //let matched = document.querySelectorAll('.front')
-
-        //console.log(matched)
             cards.forEach((card) => {
                         
             const studyGuide = document.createElement('div')
             studyGuide.className = "card row-fluid"
             studyGuide.id = "studyguide"
-           // studyGuide.className = ""
             studyGuide.style = "width: 18rem"
             
             const cardImage = document.createElement("img")
@@ -304,9 +230,6 @@ const createSpread = () => {
             cardImage.className = "d-block img-fluid img-thumbnail"
             cardImage.src = card.image
             cardImage.classList = "card-img-top"
-            //studyGuide.appendChild(cardImage)
-
-
 
             const cardBody = document.createElement('div')
             cardBody.className = "card-body"
@@ -318,28 +241,54 @@ const createSpread = () => {
             let link = document.createElement("a")
             link.setAttribute("href", card.link)
             link.innerText = "Link for more information."
-           // let nextBtn = document.createElement('button')
-          //  nextBtn.innerText = "Click to continue game"
-
-            //const innerCarousel = document.createElement('div')
+          
             const cardDiv = document.getElementById("cardStudyGuide")
             cardDiv.appendChild(studyGuide)
-          //  studyGuide.appendChild(cardImage)
             studyGuide.appendChild(cardBody)
             cardBody.appendChild(cardImage)
             cardBody.appendChild(h5)
             cardBody.appendChild(p)
             cardBody.appendChild(link)
-            //cardBody.appendChild(nextBtn)
 
- 
    })
 } 
 
-
+/* const createSlideShow = () =>{
+ //function showSlide(slideIndex) {
+    let currentSlide = 1
+    const slides = document.getElementsByClassName('carouselExample');
+    if (slideIndex > slides.length) { 
+        let currentSlide = 1 
+    }
+    if (slideIndex < 1) { 
+        let currentSlide = slides.length 
+    }
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none'
+    }
+    slides[currentSlide - 1].style.display = 'flex'
+  }
+  
+  
+  const nextSlide = () => {
+    showSlide(currentSlide += 1);
+  }
+  
+  const previousSlide = () => {
+    showSlide(currentSlide -= 1);
+  }
+  
+  window.onload = function () {
+    showSlide(currentSlide);
+    document.getElementById('carousel-control-prev').addEventListener('click', function () {
+      previousSlide();
+    })
+    document.getElementById("carousel-control-next").addEventListener('click', function () {
+      nextSlide();
+    })
+  }  */
         
         const resetRound = () => {
-           // console.log("resetting")
             firstCardPicked = ''
             secondCardPicked = ''
             numOfCardsPicked = 0
@@ -351,9 +300,9 @@ const createSpread = () => {
             let front = document.querySelectorAll('.front')
             
             front.forEach(card => {
-               card.style.visibility = "initial"
-               card.parentNode.parentNode.classList.remove('selected')
-                   })
+            card.style.visibility = "initial"
+            card.parentNode.parentNode.classList.remove('selected')
+            })
         
         }
 
@@ -367,7 +316,7 @@ const createSpread = () => {
 
 
     startBtn.addEventListener("click", () => {
-//startGame()
+
     createSpread()
     startGameDiv.style.visibility = "hidden"
     const carouselDiv = document.getElementById('carousel study guide')
