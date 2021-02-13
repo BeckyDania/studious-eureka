@@ -130,12 +130,14 @@ game.appendChild(board)
 
 const createStudyGuide = () => {
 
-    cards.forEach((card) => {
+    cards.forEach((card, i) => {
                 
     const studyGuide = document.createElement('div')
     studyGuide.className = "card row-fluid"
     studyGuide.id = "studyguide"
     studyGuide.style = "width: 30rem"
+    studyGuide.setAttribute('data-id', i)
+
     
     const cardImage = document.createElement("img")
     cardImage.setAttribute('data-set', card.name)
@@ -145,6 +147,7 @@ const createStudyGuide = () => {
 
     const cardBody = document.createElement('div')
     cardBody.className = "card-body"
+    cardBody.setAttribute('data-id', i)
     let h5 = document.createElement('h5')
     h5.classList = "card-title"
     h5.innerText = card.name
@@ -156,19 +159,34 @@ const createStudyGuide = () => {
 
 
     const controls = document.createElement("div")
+    controls.id = "controls"
     const prevControl = document.createElement("button")
-    prevControl.setAttribute("href", "#")
-    prevControl.className = "previous"
-    prevControl.innerHTML = ">&laquo"
+    //prevControl.setAttribute("href", "#")
+
+    prevControl.classList = "previous"
+    prevControl.id = "previous"
+   // prevControl.innerHTML = ">&laquo"
     prevControl.innerText = "Previous"
+    prevControl.addEventListener("click", () => {
+        console.log('hello')
+        console.log(cardBody)
+        console.log(prevControl.parentNode.parentNode)
+        // move to previous sibling
+        console.log(cardBody.dataset.id)
+        // it is saved as a string -convert into a #
+        console.log(cardBody.parentNode.firstElementChild)
+    
+})
     
     const nextControl = document.createElement("button")
     nextControl.setAttribute("href", "#")
-    nextControl.className = "next"
-    nextControl.innerHTML = "&raquo"
+    nextControl.classList = "next"
+    nextControl.id = "next"
     nextControl.innerText = "Next"
+    nextControl.addEventListener("click", () => {
+        console.log('hello')
 
-  
+    })
     const cardDiv = document.getElementById("cardStudyGuide")
     cardDiv.appendChild(studyGuide)
     studyGuide.appendChild(cardBody)
@@ -180,49 +198,59 @@ const createStudyGuide = () => {
     controls.appendChild(prevControl)
     controls.appendChild(nextControl)
 
-})
+    })
 } 
 
+const createSlideShow = () => {
 
+    console.log(cardBody.dataset.id)
+    let slideIndex = cardBody.dataset.id
 
-/* const createSlideShow = () =>{
-//function showSlide(slideIndex) {
-let currentSlide = 1
-const slides = document.getElementsByClassName('carouselExample');
-if (slideIndex > slides.length) { 
-let currentSlide = 1 
-}
-if (slideIndex < 1) { 
-let currentSlide = slides.length 
-}
-for (let i = 0; i < slides.length; i++) {
-slides[i].style.display = 'none'
-}
-slides[currentSlide - 1].style.display = 'flex'
-}
+    let currentCard = 1
+    if ( slideIndex> slides.length){ 
+        let currentCard = 0
+  }
+        if (slideIndex < 1) { 
+        let currentCard = slides.length 
+          }
+        for (let i = 0; i < slides.length; i++) {
+           slides[i].style.display = 'none'
+          
+       }
 
-
-const nextSlide = () => {
-showSlide(currentSlide += 1);
 }
 
-const previousSlide = () => {
-showSlide(currentSlide -= 1);
+
+
+// const createSlideShow = () => {
+  
+//     let currentSlide = 1
+
+   //let slideIndex = slides.getAttribute("data-id")
+   
+   //let slideIndex = slides.indexOf(card)
+   //let slideIndex
+
+/* if ( slideIndex> slides.length){ 
+      let currentSlide = 0
 }
+      if (slideIndex < 1) { 
+      let currentSlide = slides.length 
+        }
+      for (let i = 0; i < slides.length; i++) {
+         slides[i].style.display = 'none'
+        
+     }
 
-window.onload = function () {
-showSlide(currentSlide);
-document.getElementById('carousel-control-prev').addEventListener('click', function () {
-previousSlide();
-})
-document.getElementById("carousel-control-next").addEventListener('click', function () {
-nextSlide();
-})
-}  */
+  
 
+ const previousSlide = () => {
+         showCard(currentCard -= 1);
+         }
 
-
-
+ const nextSlide = () => {
+    showCard(currentCard += 1);
+         } */
 
 const createSpread = () => {
 
@@ -349,6 +377,7 @@ const createSpread = () => {
 })
 
 createStudyGuide()
+//createSlideShow()
 selections()
 checkForMatch()
 resetRound()
