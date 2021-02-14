@@ -5,6 +5,7 @@ by Becky King-Reilly
 
 ## Description
 Match great people with their accomplishments!
+https://beckydania.github.io/studious-eureka/
 
 ## Technologies Used
 HTML
