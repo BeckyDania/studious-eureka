@@ -170,20 +170,19 @@ const createStudyGuide = () => {
     prevControl.addEventListener("click", () => {
         console.log('hello')
         console.log(cardBody)
-        console.log(prevControl.parentNode.parentNode)
-        // move to previous sibling
+        let previousCard = cardBody.parentNode
+        previousCard.classList.add("previousCard")
+        
         console.log(cardBody.dataset.id)
-        // it is saved as a string -convert into a #
-        
-        
-       // createSlideShow()
-       /* for (let i = 8; i < cardBody.length; i--) {
-        cardBody[i].style.display = 'none'
-        prevControl.parentNode.parentNode.previousElementSibling.style.display = "block" */
-
-
-   //}
-})
+       let currentCard= cardBody.parentNode.previousSibling
+       currentCard.classList.add("currentCard")
+        console.log(currentCard)
+       if(cardBody.classList !== "currentCard" && cardBody.classList !== previousCard){
+         cardBody.style.visibility = "hidden"
+         currentCard.style.visibility = "visible"
+         previousCard.style.visibility = "hidden"
+       }
+    })
     
     const nextControl = document.createElement("button")
     //nextControl.setAttribute("href", "#")
@@ -192,6 +191,9 @@ const createStudyGuide = () => {
     nextControl.innerText = "Next"
     nextControl.addEventListener("click", () => {
         console.log('hello')
+        
+
+
     })
 
     const cardDiv = document.getElementById("cardStudyGuide")
@@ -207,57 +209,6 @@ const createStudyGuide = () => {
 
     })
 } 
-
-/* const createSlideShow = () => {
-
-    let slides = document.getElementsByClassName('card-body')
-    console.log(slides.dataset.id)
-    let slideIndex = cardBody.dataset.id
-
-    let currentCard = 1
-
-    if ( slideIndex > slides.length){ 
-        let currentCard = 0
-  }
-        if (slideIndex < 1) { 
-        let currentCard = slides.length 
-          }
-        for (let i = 0; i < slides.length; i++) {
-           slides[i].style.display = 'none'
-       }
-
-const previousSlide = () => {
-    (currentCard -= 1);
-    }
-} */
-
-// const createSlideShow = () => {
-  
-//     let currentSlide = 1
-
-   //let slideIndex = slides.getAttribute("data-id")
-   
-   //let slideIndex = slides.indexOf(card)
-   //let slideIndex
-
-/* if ( slideIndex> slides.length){ 
-      let currentSlide = 0
-}
-      if (slideIndex < 1) { 
-      let currentSlide = slides.length 
-        }
-      for (let i = 0; i < slides.length; i++) {
-         slides[i].style.display = 'none'
-        
-     }
-// Create function to go to the previous slide
- const previousSlide = () => {
-         showCard(currentCard -= 1);
-         }
-
- const nextSlide = () => {
-    showCard(currentCard += 1);
-         } */
 
 const createSpread = () => {
 
