@@ -161,26 +161,66 @@ const createStudyGuide = () => {
     const controls = document.createElement("div")
     controls.id = "controls"
     const prevControl = document.createElement("button")
-    //prevControl.setAttribute("href", "#")
-
+    
     prevControl.classList = "previous"
     prevControl.id = "previous"
-   // prevControl.innerHTML = ">&laquo"
     prevControl.innerText = "Previous"
+
+/////PREVIOUS EVENT LISTENER/////
+/// GOING TO HAVE TO SWITCH THIS TO NEXT
     prevControl.addEventListener("click", () => {
-        console.log('hello')
-        console.log(cardBody)
         let previousCard = cardBody.parentNode
         previousCard.classList.add("previousCard")
-        
-        console.log(cardBody.dataset.id)
+       // console.log(previousCard)
+
+     //  console.log(cardBody.parentNode.parentNode.firstChild)
+       
+       const firstChild = cardBody.parentNode.parentNode.firstChild
+      // console.log(firstChild)
+       
+       const lastChild = cardBody.parentNode.parentNode.lastChild
+      // console.log(lastChild)
+       
        let currentCard= cardBody.parentNode.previousSibling
        currentCard.classList.add("currentCard")
-        console.log(currentCard)
-       if(cardBody.classList !== "currentCard" && cardBody.classList !== previousCard){
-         cardBody.style.visibility = "hidden"
-         currentCard.style.visibility = "visible"
-         previousCard.style.visibility = "hidden"
+   //    console.log(currentCard)
+    
+   if(cardBody.classList !== "currentCard" && cardBody.classList !== previousCard){
+                cardBody.style.visibility = "hidden"
+                currentCard.style.visibility = "visible"
+         console.log(currentCard)
+                previousCard.style.visibility = "hidden"
+         console.log(previousCard)
+    //     // Need the following to take off the "previousCard"
+                cardBody.parentNode.classList.remove('currentCard')
+        if(previousCard !== lastChild){
+                cardBody.parentNode.nextSibling.classList.remove ('previousCard')
+              //  firstChild.classList.remove('previousCard')
+            }
+        
+    //    if(currentCard === firstChild){  
+    //            firstChild.classList.remove('currentCard')
+    //            firstChild.classList.add('previousCard')
+    //           // prevControl.remove()
+    //            lastChild.classList.add('currentCard')
+    //            firstChild.style.visibility = "hidden"
+    //            document.getElementsByClassName('currentCard').style.visibility = "visible"
+    //      }
+
+         ///need something for starting over///
+       /* if(cardBody.parentNode.parentNode.firstChild === true){
+           cardBody.parentNode.classList.remove('currentCard')
+           cardBody.parentNode.previousSibling.classList.remove('previousCard')
+           cardBody.style.visibility = "hidden"
+           cardBody.parentNode.parentNode.lastChild.classList.add('currentCard')
+           cardBody.parentNode.parentNode.lastChild.style.visibility = "visible" */
+
+       //     cardBody.style.visibility = 'hidden'
+
+       //     
+      // }
+       //    console.log('startover')
+       //     }
        }
     })
     
@@ -189,9 +229,11 @@ const createStudyGuide = () => {
     nextControl.classList = "next"
     nextControl.id = "next"
     nextControl.innerText = "Next"
+
     nextControl.addEventListener("click", () => {
+    
         console.log('hello')
-        
+
 
 
     })
